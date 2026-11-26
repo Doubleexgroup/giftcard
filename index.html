@@ -8,17 +8,22 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- #####################################################################
+     GRUPPO 1 · STILE (CSS)
+     Colori, font e dimensioni. Per i colori cambia le variabili in :root.
+     ##################################################################### -->
 <style>
 /* =====================================================================
-   COSA MODIFICARE
-   - IMMAGINI, LOGHI, TESTI, DATI AZIENDA, LINK: blocco "IMPOSTAZIONI" in fondo
+   STILE DELLA LANDING
    - COLORI E FONT: variabili qui sotto (--accent = azzurro "sky" del marchio)
    - DIMENSIONE DEI LOGHI: --logo-height e --logo-azienda-height
+   - DIMENSIONE DELLA CARD: regola .hero-img più sotto
    ===================================================================== */
 :root{
   --logo-height:50px;
   --logo-azienda-height:42px;
-  --page-image:url('IMG/sfondo1.jpg'); /* si aggiorna da IMPOSTAZIONI */
+  --page-image:url('IMG/sfondo1.jpg'); /* si aggiorna da config.js */
   --bg:#05070a;            /* nero profondo, come il logo bianco del sito */
   --accent:#2fa8dc;        /* azzurro "sky" */
   --accent-h:#4dbbea;      /* azzurro al passaggio del mouse */
@@ -26,54 +31,61 @@
   --muted:rgba(255,255,255,.72);
   --font:'Montserrat','Helvetica Neue',Arial,sans-serif;
 }
+
+/* ---------- Base ---------- */
 *{box-sizing:border-box;margin:0;padding:0}
 body{font:400 .95rem/1.6 var(--font);color:var(--text);background:var(--bg);overflow-x:hidden}
 img{max-width:100%;display:block}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-#snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:50}
+[hidden]{display:none!important}
 h1,h2,h3{font-weight:600;text-transform:uppercase;letter-spacing:.04em;line-height:1.12}
 h1 i{color:var(--accent);font-style:normal}
 
-/* Sfondo */
+/* ---------- Sfondo e neve ---------- */
 .bg{position:fixed;inset:0;z-index:-1;background:var(--page-image) 62% center/cover no-repeat,var(--bg)}
+#snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:50}
 
-/* Una sola schermata */
+/* ---------- Una sola schermata ---------- */
 .page{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;
   background:linear-gradient(180deg,rgba(5,7,10,.45) 0,rgba(5,7,10,.55) 45%,rgba(5,7,10,.88) 100%)}
 
-/* Logo in alto a sinistra */
+/* ---------- Logo in alto a sinistra ---------- */
 .top{padding:max(14px,env(safe-area-inset-top)) max(20px,3vw) 0}
 .logo{display:inline-block}
 .logo img{height:var(--logo-height);width:auto;filter:drop-shadow(0 2px 12px rgba(0,0,0,.55))}
-[hidden]{display:none!important}
 
-/* Centro */
+/* ---------- Centro ---------- */
 .hero{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px 22px;gap:clamp(8px,1.6vh,16px)}
 .eyebrow{font:600 .72rem var(--font);letter-spacing:.3em;text-transform:uppercase;color:var(--accent)}
+.eyebrow:empty{display:none}
 .hero h1{font-size:clamp(1.6rem,min(4.6vw,6.4vh),3.6rem);text-shadow:0 4px 30px rgba(0,0,0,.6)}
 .hero-img{width:auto;height:auto;max-width:min(640px,90vw);max-height:min(38vh,360px);object-fit:contain;filter:drop-shadow(0 6px 24px rgba(0,0,0,.5))}
 .lead{max-width:34em;font-size:clamp(.9rem,1.1vw + .3vh,1.08rem);color:var(--muted);text-shadow:0 2px 16px rgba(0,0,0,.7)}
 
-/* UNICO PULSANTE */
+/* ---------- UNICO PULSANTE ---------- */
 .cta{display:inline-block;padding:16px 44px;border-radius:999px;color:#fff;text-decoration:none;font:600 .82rem var(--font);letter-spacing:.14em;text-transform:uppercase;background:var(--accent);transition:background .2s,transform .2s}
 .cta:hover{background:var(--accent-h);transform:translateY(-2px)}
 
-/* I tre punti */
+/* ---------- I tre punti ---------- */
 .points{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:1080px;width:100%;margin:0 auto;padding:6px max(20px,3vw) 16px}
 .points div{border-top:2px solid var(--accent);padding-top:10px}
 .points h3{font-size:.92rem;margin-bottom:4px}
 .points p{font-size:.8rem;line-height:1.5;color:var(--muted)}
 
-/* Parte bassa */
-.foot{background:#000;border-top:1px solid rgba(255,255,255,.12);padding:14px max(20px,3vw) max(14px,env(safe-area-inset-bottom));display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;font-size:.76rem;color:var(--muted)}
+/* ---------- Parte bassa: dati azienda CENTRATI ---------- */
+.foot{background:#000;border-top:1px solid rgba(255,255,255,.12);padding:14px max(20px,3vw) max(14px,env(safe-area-inset-bottom));display:grid;grid-template-columns:1fr auto 1fr;gap:22px;align-items:center;font-size:.76rem;color:var(--muted)}
+.foot .azienda-logo{grid-column:1;justify-self:start}
 .foot .azienda-logo img{height:var(--logo-azienda-height);width:auto}
+.foot .dati{grid-column:2;text-align:center}
+.foot .links{grid-column:3}
 .foot .dati strong{color:var(--text);font-weight:600}
 .foot a{text-decoration:none}
 .foot a:hover{color:var(--accent);text-decoration:underline}
 .foot .links{display:flex;flex-direction:column;gap:2px;text-align:right;text-transform:uppercase;letter-spacing:.08em;font-weight:500}
 .copy{grid-column:1/-1;text-align:center;font-size:.7rem;opacity:.55;border-top:1px solid rgba(255,255,255,.1);padding-top:8px}
 
+/* ---------- Smartphone e schermi stretti ---------- */
 @media(max-width:820px){
   :root{--logo-height:38px;--logo-azienda-height:34px}
   .bg{background-position:66% center}
@@ -81,23 +93,37 @@ h1 i{color:var(--accent);font-style:normal}
   .points h3{font-size:.84rem}
   .points p{font-size:.74rem;line-height:1.4}
   .foot{grid-template-columns:1fr;text-align:center;gap:8px}
-  .foot .azienda-logo{display:flex;justify-content:center}
+  .foot .azienda-logo,.foot .dati,.foot .links{grid-column:auto}
+  .foot .azienda-logo{display:flex;justify-content:center;justify-self:center}
   .foot .links{flex-direction:row;justify-content:center;gap:16px;text-align:center}
 }
+
+/* ---------- Schermi bassi su computer ---------- */
 @media(max-height:620px) and (min-width:821px){.hero-img{display:none}}
+
+/* ---------- Meno animazioni per chi le preferisce ---------- */
 @media(prefers-reduced-motion:reduce){#snow{display:none}.cta{transition:none}}
 </style>
 </head>
+
 <body>
+
+<!-- #####################################################################
+     GRUPPO 2 · STRUTTURA DELLA PAGINA (HTML)
+     I testi sono vuoti perché arrivano dal GRUPPO 3 (IMPOSTAZIONI).
+     ##################################################################### -->
+<!-- Sfondo e neve -->
 <div class="bg" id="bg" role="img"></div>
 <canvas id="snow" aria-hidden="true"></canvas>
 
 <div class="page">
+
+  <!-- Logo in alto a sinistra (impostato in config.js, voce "logo") -->
   <div class="top">
-    <!-- LOGO in alto a sinistra (voce "logo" in IMPOSTAZIONI) -->
     <a class="logo" id="logo" hidden><img id="logoImg" alt=""></a>
   </div>
 
+  <!-- Centro: titolo, pulsante, immagine, sottotitolo -->
   <main class="hero">
     <div class="eyebrow" data-t="sopratitolo"></div>
     <h1 data-t="titolo"></h1>
@@ -107,12 +133,14 @@ h1 i{color:var(--accent);font-style:normal}
     <p class="lead" data-t="sottotitolo"></p>
   </main>
 
+  <!-- I tre punti -->
   <section class="points">
     <div><h3 data-t="punto1Titolo"></h3><p data-t="punto1Testo"></p></div>
     <div><h3 data-t="punto2Titolo"></h3><p data-t="punto2Testo"></p></div>
     <div><h3 data-t="punto3Titolo"></h3><p data-t="punto3Testo"></p></div>
   </section>
 
+  <!-- Parte bassa: logo azienda, dati societari, link FAQ e condizioni -->
   <footer class="foot">
     <a class="azienda-logo" id="aziendaLogoLink" hidden><img id="aziendaLogo" alt=""></a>
     <div class="dati" id="dati"></div>
@@ -122,25 +150,32 @@ h1 i{color:var(--accent);font-style:normal}
     </nav>
     <p class="copy" data-t="copyright"></p>
   </footer>
+
 </div>
 
-<!-- =====================================================================
-     IMPOSTAZIONI: immagini, loghi, dati azienda e testi.
-     Modifica SOLO tra gli apici. Nei nomi dei file le maiuscole contano.
-     Per una parola in oro nei titoli usa <i>parola</i>.
-     ===================================================================== -->
+
+<!-- #####################################################################
+     GRUPPO 3 · IMPOSTAZIONI (testi, immagini, loghi, dati azienda, link)
+     È la parte da modificare più spesso.
+     ##################################################################### -->
 <script>
+/* =====================================================================
+   IMPOSTAZIONI: immagini, loghi, dati azienda e testi.
+   Modifica SOLO tra gli apici. Nei nomi dei file le maiuscole contano.
+   Per una parola in azzurro nei titoli usa <i>parola</i>.
+   ===================================================================== */
 var IMPOSTAZIONI = {
-  /* IMMAGINI (file nella cartella IMG) */
-  sfondo:        "IMG/sfondo1.jpg",
-  logo:          "IMG/Logo Dinner in the Sky Italy_1.png",   /* logo in alto a sinistra; "" = nessuno */
-  logoLink:      "https://www.dinnerinthesky.it",
-  logoAlt:       "Dinner in the Sky",
+
+  /* ---------- IMMAGINI (file nella cartella IMG) ---------- */
+  sfondo:            "IMG/sfondo1.jpg",
+  logo:              "IMG/Logo Dinner in the Sky Italy_1.png",   /* logo in alto a sinistra; "" = nessuno */
+  logoLink:          "https://www.dinnerinthesky.it",
+  logoAlt:           "Dinner in the Sky",
   immagineTitolo:    "IMG/Biglietto regalo Dinner in the Sky natalizio.png",  /* immagine centrale; "" = nessuna */
   immagineTitoloAlt: "",
 
-  /* DATI AZIENDA (parte bassa). Lascia "" per nascondere una voce */
-  logoAzienda:     "IMG/Logo Dinner in the Sky Italy_1.png",   /* logo aziendale in basso; se il file non c'è, non compare */
+  /* ---------- DATI AZIENDA (parte bassa). Lascia "" per nascondere una voce ---------- */
+  logoAzienda:     "IMG/Logo Dinner in the Sky Italy_1.png",   /* se il file non c'è, non compare */
   logoAziendaAlt:  "Dinner in the Sky Italia",
   logoAziendaLink: "",
   ragioneSociale:  "DINNER IN THE SKY ITALIA SRL",
@@ -150,14 +185,14 @@ var IMPOSTAZIONI = {
   telefono:        "+39 342 798 2112",
   telefonoLink:    "+393427982112",
 
-  /* ALTRE SCHEDE (si aprono in una nuova scheda del browser) */
+  /* ---------- ALTRE SCHEDE (si aprono in una nuova scheda) ---------- */
   testoFaq:        "FAQ",
   linkFaq:         "faq.html",
   testoCondizioni: "Condizioni contrattuali",
   linkCondizioni:  "condizioni.html",
 
-  /* TESTI */
-  titoloPagina:  "Christmas Card | Dinner in the Sky",
+  /* ---------- TESTI ---------- */
+  titoloPagina:      "Christmas Card | Dinner in the Sky",
   descrizioneSfondo: "Christmas Card Dinner in the Sky con tavola sospesa sulla città, regali e lanterna",
 
   sopratitolo:   "",
@@ -176,14 +211,30 @@ var IMPOSTAZIONI = {
 
   copyright:     "© 2026 DINNER IN THE SKY ITALIA SRL · Tutti i diritti riservati"
 };
+</script>
 
-/* ---- Da qui in poi non modificare ---- */
+
+<!-- #####################################################################
+     GRUPPO 4 · FUNZIONI (non modificare)
+     4a. Applica le IMPOSTAZIONI alla pagina
+     4b. Effetto neve
+     ##################################################################### -->
+<script>
+/* ---------- 4a. Applica le impostazioni ---------- */
+/* =====================================================================
+   Applica alla pagina le IMPOSTAZIONI di config.js.
+   Non c'è nulla da modificare qui.
+   ===================================================================== */
 (function(){
   var C=IMPOSTAZIONI,$=function(id){return document.getElementById(id)};
+
+  /* Titolo scheda, sfondo e testi */
   document.title=C.titoloPagina;
   if(C.sfondo)document.documentElement.style.setProperty('--page-image',"url('"+C.sfondo+"')");
   $('bg').setAttribute('aria-label',C.descrizioneSfondo);
   document.querySelectorAll('[data-t]').forEach(function(el){el.innerHTML=C[el.dataset.t]||''});
+
+  /* Pulsante */
   var b=$('bottone');b.textContent=C.bottoneTesto;b.href=C.bottoneLink;
 
   /* Immagine opzionale: compare solo se il file esiste */
@@ -211,12 +262,18 @@ var IMPOSTAZIONI = {
   if(C.telefono)parti.push(lnk(C.telefono,'tel:'+(C.telefonoLink||C.telefono)));
   parti.forEach(function(n,k){if(k)d.appendChild(document.createTextNode(' · '));d.appendChild(n)});
 
+  /* Link a FAQ e condizioni */
   var f=$('linkFaq'),c=$('linkCond');
   f.textContent=C.testoFaq;f.href=C.linkFaq;
   c.textContent=C.testoCondizioni;c.href=C.linkCondizioni;
 })();
 
-/* Neve che cade (si ferma se l'utente preferisce meno animazioni) */
+/* ---------- 4b. Effetto neve ---------- */
+/* =====================================================================
+   Effetto neve che cade. Si ferma se l'utente ha disattivato le animazioni.
+   Per cambiare quantità: numeri 60 (telefono) e 130 (computer).
+   Per cambiare colore delle scintille: '#8fd3f4'.
+   ===================================================================== */
 (function(){
   if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var c=document.getElementById('snow'),x=c.getContext('2d'),W,H,F=[],d=Math.min(devicePixelRatio||1,2);
@@ -237,5 +294,6 @@ var IMPOSTAZIONI = {
   init();addEventListener('resize',init);requestAnimationFrame(draw);
 })();
 </script>
+
 </body>
 </html>
