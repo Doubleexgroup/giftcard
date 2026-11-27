@@ -43,9 +43,9 @@ h1,h2,h3{font-weight:600;text-transform:uppercase;letter-spacing:.04em;line-heig
 h1 i{color:var(--accent);font-style:normal}
 
 /* ---------- Sfondo diviso in pannelli ---------- */
-.bg{position:fixed;inset:0;z-index:-1;background:var(--bg);display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:var(--sfondo-gap)}
+.bg{position:fixed;inset:0;z-index:-1;background:var(--bg);display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:var(--sfondo-gap);overflow:hidden}
 .bg.righe{grid-auto-flow:row;grid-auto-columns:auto;grid-auto-rows:1fr}
-.bg .pannello{background:linear-gradient(160deg,#0f1d2b,#05070a) center/cover no-repeat;min-width:0;min-height:0}
+.bg .pannello{background:linear-gradient(160deg,#0f1d2b,#05070a) center/cover no-repeat;min-width:0;min-height:0;filter:blur(var(--sfondo-blur, 8px));transform:scale(1.04)}
 @media(max-width:820px){.bg:not(.colonne){grid-auto-flow:row;grid-auto-columns:auto;grid-auto-rows:1fr}}
 
 /* ---------- Una sola schermata ---------- */
@@ -173,6 +173,7 @@ var IMPOSTAZIONI = {
   sfondo:            ["IMG/Cena sospesa sul Natale di Roma.png"],
   sfondoDisposizione: "auto",   /* "auto" = colonne su computer e righe su telefono | "colonne" | "righe" */
   logo:              "IMG/Logo Dinner in the Sky Italy_1.png",   /* logo in alto a sinistra; "" = nessuno */
+  sfondoSfocatura: 8,  // 0 = nitido; 8 = molto sfumato; 12 = fortemente sfumato
   logoLink:          "https://www.dinnerinthesky.it",
   logoAlt:           "Dinner in the Sky",
   immagineTitolo:    "IMG/Biglietto regalo Dinner in the Sky natalizio.png",  /* immagine centrale; "" = nessuna */
@@ -234,6 +235,7 @@ var IMPOSTAZIONI = {
   /* Titolo scheda, sfondo e testi */
   document.title=C.titoloPagina;
   /* Sfondo a pannelli: ogni immagine che esiste riempie il suo pannello */
+  var bg=$('bg'),lista=[].concat(C.sfondo||[]).filter(function(x){return x!==undefined});
   var bg=$('bg'),lista=[].concat(C.sfondo||[]).filter(function(x){return x!==undefined});
   bg.setAttribute('aria-label',C.descrizioneSfondo);
   if(C.sfondoDisposizione==='righe')bg.classList.add('righe');
